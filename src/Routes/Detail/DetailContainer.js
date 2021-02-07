@@ -19,7 +19,7 @@ export default class extends React.Component {
     async componentDidMount() {
         const {
             match: {
-                params: { id },
+                params: { id, number },
             },
             history: { push },
         } = this.props;
@@ -39,7 +39,18 @@ export default class extends React.Component {
                 const request = await movieApi.movieDetail(parsedId); //why?
                 result = request.data;
                 const creditsRequest = await movieApi.credits(parsedId);
+
                 credits = creditsRequest;
+                credits.data.crew = credits.data.crew.filter(
+                    (credits) =>
+                        credits.job === 'Director' ||
+                        credits.job === 'Producer' ||
+                        credits.job === 'Writer'
+                );
+                credits.data.crew = credits.data.crew.sort(
+                    (a, b) => b.job - a.job
+                );
+                console.log(credits.data.crew);
                 const simlarRequest = await movieApi.similar(parsedId);
 
                 simlarRequest.data.results = simlarRequest.data.results.sort(
@@ -52,6 +63,7 @@ export default class extends React.Component {
                 const request = await tvApi.showDetail(parsedId);
                 result = request.data;
                 const creditsRequest = await tvApi.credits(parsedId);
+
                 credits = creditsRequest;
                 const simlarRequest = await tvApi.similar(parsedId);
                 simlarRequest.data.results = simlarRequest.data.results.sort(
@@ -59,7 +71,6 @@ export default class extends React.Component {
                         return b.popularity - a.popularity;
                     }
                 );
-
                 similar = simlarRequest;
             }
         } catch {

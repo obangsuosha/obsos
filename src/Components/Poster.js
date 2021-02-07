@@ -71,6 +71,8 @@ const Poster = ({ id, imgUrl, title, rating, year, isMovie = false }) => (
                 ? `/movie/${id}`
                 : isMovie === 'show'
                 ? `/show/${id}`
+                : isMovie === 'collection'
+                ? `/collection/${id}`
                 : `/profile/${id}`
         }
     >

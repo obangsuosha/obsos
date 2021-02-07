@@ -14,6 +14,7 @@ import Search from '../Routes/Search';
 import Detail from '../Routes/Detail';
 import People from '../Routes/People';
 import Profile from '../Routes/Profile';
+import Collection from '../Routes/Collection';
 
 export default () => (
     <Router>
@@ -27,7 +28,8 @@ export default () => (
             <Route path="/movie/:id" component={Detail} />
             <Route path="/show/:id" component={Detail} />
             <Route path="/profile/:id" component={Profile} />
-
+            <Route path="/collection/:id" component={Collection} />
+            <Route path="/tv/:id/season/:number" component={Collection} />
             <Redirect from="*" to="/" />
         </Switch>
     </Router>

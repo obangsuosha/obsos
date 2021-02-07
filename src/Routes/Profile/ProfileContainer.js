@@ -40,10 +40,16 @@ export default class extends React.Component {
             tvRequest.data.cast = tvRequest.data.cast.sort((a, b) => {
                 return b.popularity - a.popularity;
             });
+            tvRequest.data.crew = tvRequest.data.crew.sort((a, b) => {
+                return b.popularity - a.popularity;
+            });
 
             tvCredits = tvRequest.data;
             const movieRequest = await peopleApi.movieCredits(parsedId);
             movieRequest.data.cast = movieRequest.data.cast.sort((a, b) => {
+                return b.popularity - a.popularity;
+            });
+            movieRequest.data.crew = movieRequest.data.crew.sort((a, b) => {
                 return b.popularity - a.popularity;
             });
             movieCredits = movieRequest.data;

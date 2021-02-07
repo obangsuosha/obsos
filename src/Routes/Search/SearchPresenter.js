@@ -49,7 +49,19 @@ const SearchPresenter = ({
             <Loader />
         ) : (
             <>
-                {console.log(movieResult)}
+                {collectionResult && collectionResult.length > 0 && (
+                    <Section title="Collection">
+                        {collectionResult.map((collection) => (
+                            <Poster
+                                id={collection.id}
+                                key={collection.id}
+                                title={collection.name}
+                                imgUrl={collection.poster_path}
+                                isMovie="collection"
+                            />
+                        ))}
+                    </Section>
+                )}
                 {movieResult && movieResult.length > 0 && (
                     <Section title="Movies">
                         {movieResult.map((movie) => (

@@ -71,12 +71,17 @@ export const peopleApi = {
 };
 
 export const collectionApi = {
+    detail: (id) => api.get(`collection/${id}`),
     search: (term) =>
         api.get('search/collection', {
             params: {
                 query: encodeURIComponent(term),
             },
         }),
+};
+
+export const seasonApi = {
+    detail: (id, number) => api.get(`tv/${id}/season/${number}`),
 };
 
 export const companyApi = {

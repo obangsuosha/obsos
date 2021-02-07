@@ -1,12 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
-import {
-    collectionApi,
-    movieApi,
-    peopleApi,
-    tvApi,
-    companyApi,
-} from '../../api';
+import { collectionApi, movieApi, peopleApi, tvApi } from '../../api';
 import SearchPresenter from './SearchPresenter';
 
 export default class extends React.Component {
@@ -51,16 +45,12 @@ export default class extends React.Component {
             const {
                 data: { results: collectionResult },
             } = await collectionApi.search(searchTerm);
-            // const {
-            //     data: { results: companyResult },
-            // } = await companyApi.search(searchTerm);
 
             this.setState({
                 movieResult,
                 tvResult,
                 peopleResult,
                 collectionResult,
-                // companyResult,
             });
         } catch {
             this.setState({ error: "can't find result" });
@@ -79,7 +69,7 @@ export default class extends React.Component {
             searchTerm,
             peopleResult,
             collectionResult,
-            // companyResult,
+
             error,
             loading,
         } = this.state;
@@ -90,7 +80,6 @@ export default class extends React.Component {
                 tvResult={tvResult}
                 peopleResult={peopleResult}
                 collectionResult={collectionResult}
-                // companyResult={companyResult}
                 searchTerm={searchTerm}
                 error={error}
                 loading={loading}
