@@ -50,14 +50,13 @@ export default () => {
 
     const loadMore = async () => {
         let loadedData = popular;
-        console.log(page);
 
         try {
             const {
                 data: { results: mData },
             } = await movieApi.popular(page);
             loadedData = [...loadedData, ...mData];
-            console.log(loadedData);
+
             setPopular(uniqBy(loadedData, 'id'));
         } catch {
             setError("Can't find TV information.");
