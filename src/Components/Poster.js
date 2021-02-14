@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    padding: 0px 10px;
-`;
-
 const Image = styled.div`
     background-image: url(${(props) => `${props.bgUrl}`});
     height: 225px;
@@ -30,22 +21,9 @@ const Rate = styled.span`
     left: 100px;
     color: yellow;
     opacity: 0;
+    font-weight: 700;
     transition: opacity 0.2s linear;
 `;
-
-const ImageContainer = styled.div`
-    margin-bottom: 5px;
-    &:hover {
-        ${Image} {
-            opacity: 0.5;
-        }
-        ${Rate} {
-            opacity: 1;
-        }
-    }
-    position: relative;
-`;
-
 const Title = styled.span`
     display: block;
     font-size: 12px;
@@ -62,6 +40,28 @@ const Year = styled.span`
     color: grey;
     margin: 0px;
     padding: 0px;
+`;
+
+const ImageContainer = styled.div`
+    margin-bottom: 5px;
+
+    position: relative;
+`;
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    padding: 0px 10px;
+    &:hover {
+        ${Image} {
+            opacity: 0.7;
+        }
+        ${Rate} {
+            opacity: 1;
+        }
+    }
 `;
 
 const Poster = ({ id, imgUrl, title, rating, year, isMovie = false }) => (

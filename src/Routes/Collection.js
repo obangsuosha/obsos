@@ -109,18 +109,19 @@ const ContentCoverH = styled.div`
 `;
 
 const CTContainer = styled.div`
-    width: 700px;
+    width: 100%;
 `;
 
 const ContentName = styled.div`
     font-size: 18px;
+    font-weight: 600;
     height: 18px;
     margin: 10px 0px;
     padding: 0px;
 `;
 
 const ContentOverview = styled.div`
-    font-size: 12px;
+    font-size: 14px;
     height: 18px;
     margin: 0px;
     padding: 0px;
