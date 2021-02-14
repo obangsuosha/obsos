@@ -1,11 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from 'react';
-import { collectionApi, movieApi, peopleApi, tvApi } from '../../api';
+import { collectionApi, movieApi, peopleApi, tvApi } from '../api';
 import styled from 'styled-components';
-import Loader from '../../Components/Loader';
-import Section from '../../Components/Section';
-import Message from '../../Components/Message';
-import Poster from '../../Components/Poster';
+import Loader from '../Components/Loader';
+import Section from '../Components/Section';
+import Message from '../Components/Message';
+import Poster from '../Components/Poster';
 import { Helmet } from 'react-helmet';
 import uniqBy from 'lodash.uniqby';
 
@@ -65,7 +65,9 @@ export default () => {
                     movieResult.results = uniqBy(
                         [...movieResult.results, ...moreMovie],
                         'id'
-                    );
+                    ).sort((a, b) => {
+                        return b.popularity - a.popularity;
+                    });
                 }
             }
 
@@ -77,7 +79,11 @@ export default () => {
                     const {
                         data: { results: moreShow },
                     } = await tvApi.search(searchTerm, i);
-                    tvResult = [...tvResult, ...moreShow];
+                    tvResult = uniqBy([...tvResult, ...moreShow], 'id').sort(
+                        (a, b) => {
+                            return b.popularity - a.popularity;
+                        }
+                    );
                 }
             }
 
@@ -89,7 +95,12 @@ export default () => {
                     const {
                         data: { results: morePeople },
                     } = await peopleApi.search(searchTerm, i);
-                    peopleResult = [...peopleResult, ...morePeople];
+                    peopleResult = uniqBy(
+                        [...peopleResult, ...morePeople],
+                        'id'
+                    ).sort((a, b) => {
+                        return b.popularity - a.popularity;
+                    });
                 }
             }
 
@@ -98,12 +109,9 @@ export default () => {
             } = await collectionApi.search(searchTerm);
 
             setMovieResult(movieResult);
-            console.log('MOVIES');
-            console.log(movieResult);
-            console.log('MOVIES');
-            setTvResult(uniqBy(tvResult, 'id'));
-            setPeopleResult(uniqBy(peopleResult, 'id'));
-            setCollectionResult(uniqBy(collectionResult, 'id'));
+            setTvResult(tvResult);
+            setPeopleResult(peopleResult);
+            setCollectionResult(collectionResult);
         } catch {
             setError("can't find result");
         } finally {

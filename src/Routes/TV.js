@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect, useState } from 'react';
-import { tvApi } from '../../api';
-import { useInfiniteScroll } from '../../Hooks/useInfiniteScroll';
+import { tvApi } from '../api';
+import { useInfiniteScroll } from '../Hooks/useInfiniteScroll';
 import uniqBy from 'lodash.uniqby';
 import styled from 'styled-components';
-import Section from '../../Components/Section';
-import Loader from '../../Components/Loader';
-import Message from '../../Components/Message';
-import Poster from '../../Components/Poster';
+import Section from '../Components/Section';
+import Loader from '../Components/Loader';
+import Message from '../Components/Message';
+import Poster from '../Components/Poster';
 import Helmet from 'react-helmet';
 
 const Container = styled.div`

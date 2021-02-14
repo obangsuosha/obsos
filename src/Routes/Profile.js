@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect, useState } from 'react';
-import { peopleApi } from '../../api';
+import { peopleApi } from '../api';
 import styled from 'styled-components';
-import Loader from '../../Components/Loader';
-import Message from '../../Components/Message';
+import Loader from '../Components/Loader';
+import Message from '../Components/Message';
 import { Helmet } from 'react-helmet';
 
 import { Link } from 'react-router-dom';

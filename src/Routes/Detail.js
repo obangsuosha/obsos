@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState, useEffect } from 'react';
-import { movieApi, tvApi } from '../../api';
+import { movieApi, tvApi } from '../api';
 import styled from 'styled-components';
-import Loader from '../../Components/Loader';
-import Message from '../../Components/Message';
+import Loader from '../Components/Loader';
+import Message from '../Components/Message';
 import { Helmet } from 'react-helmet';
 import { Rating } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
