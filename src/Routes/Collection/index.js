@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect, useState } from 'react';
 import { collectionApi, seasonApi } from '../../api';
@@ -178,7 +179,7 @@ export default (props) => {
     useEffect(() => {
         setLoading(true);
         viewDetail();
-    }, [id]);
+    }, []);
 
     return loading ? (
         <Loader>

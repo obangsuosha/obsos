@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect, useState } from 'react';
 import { peopleApi } from '../../api';
