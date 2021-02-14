@@ -15,9 +15,11 @@ import Detail from '../Routes/Detail';
 import People from '../Routes/People';
 import Profile from '../Routes/Profile';
 import Collection from '../Routes/Collection';
+import ScrollToTop from './ScrollToTop';
 
 export default () => (
     <Router>
+        <ScrollToTop />
         <Header />
         <Switch>
             <Route path="/" exact component={Home} />

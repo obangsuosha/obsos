@@ -10,7 +10,8 @@ import { Helmet } from 'react-helmet';
 import uniqBy from 'lodash.uniqby';
 
 const Container = styled.div`
-    psdding: 0px 20px;
+    margin-top: 50px;
+    psdding: 0px 10px;
 `;
 
 const Form = styled.form`
@@ -25,7 +26,7 @@ const Input = styled.input`
 `;
 
 export default () => {
-    const [movieResult, setMovieResult] = useState([]);
+    const [movieResult, setMovieResult] = useState(null);
     const [tvResult, setTvResult] = useState([]);
     const [peopleResult, setPeopleResult] = useState([]);
     const [collectionResult, setCollectionResult] = useState([]);
@@ -48,19 +49,23 @@ export default () => {
     };
     const searchByTerm = async () => {
         setLoading(true);
-        let movieResult = [];
+        let movieResult = { results: [] };
         let tvResult = [];
         let peopleResult = [];
         try {
             const { data: Movie } = await movieApi.search(searchTerm, 1);
             console.log(Movie.total_pages);
-            movieResult = Movie.results;
+            movieResult = Movie;
+            console.log(movieResult);
             if (Movie.total_pages > 1) {
-                for (let i = 2; i < Movie.total_pages; i++) {
+                for (let i = 2; i <= Movie.total_pages; i++) {
                     const {
                         data: { results: moreMovie },
                     } = await movieApi.search(searchTerm, i);
-                    movieResult = [...movieResult, ...moreMovie];
+                    movieResult.results = uniqBy(
+                        [...movieResult.results, ...moreMovie],
+                        'id'
+                    );
                 }
             }
 
@@ -68,7 +73,7 @@ export default () => {
             console.log(TV.total_pages);
             tvResult = TV.results;
             if (TV.total_pages > 1) {
-                for (let i = 2; i < TV.total_pages; i++) {
+                for (let i = 2; i <= TV.total_pages; i++) {
                     const {
                         data: { results: moreShow },
                     } = await tvApi.search(searchTerm, i);
@@ -80,7 +85,7 @@ export default () => {
             console.log(People.total_pages);
             peopleResult = People.results;
             if (People.total_pages > 1) {
-                for (let i = 2; i < People.total_pages; i++) {
+                for (let i = 2; i <= People.total_pages; i++) {
                     const {
                         data: { results: morePeople },
                     } = await peopleApi.search(searchTerm, i);
@@ -92,10 +97,13 @@ export default () => {
                 data: { results: collectionResult },
             } = await collectionApi.search(searchTerm);
 
-            setMovieResult(uniqBy(movieResult), 'id');
-            setTvResult(uniqBy(tvResult), 'id');
-            setPeopleResult(uniqBy(peopleResult), 'id');
-            setCollectionResult(uniqBy(collectionResult), 'id');
+            setMovieResult(movieResult);
+            console.log('MOVIES');
+            console.log(movieResult);
+            console.log('MOVIES');
+            setTvResult(uniqBy(tvResult, 'id'));
+            setPeopleResult(uniqBy(peopleResult, 'id'));
+            setCollectionResult(uniqBy(collectionResult, 'id'));
         } catch {
             setError("can't find result");
         } finally {
@@ -132,24 +140,26 @@ export default () => {
                             ))}
                         </Section>
                     )}
-                    {movieResult && movieResult.length > 0 && (
-                        <Section title="Movies">
-                            {movieResult.map((movie) => (
-                                <Poster
-                                    id={movie.id}
-                                    key={movie.id}
-                                    title={movie.title}
-                                    imgUrl={movie.poster_path}
-                                    rating={movie.vote_average}
-                                    year={
-                                        movie.release_date &&
-                                        movie.release_date.substring(0, 4)
-                                    }
-                                    isMovie="movie"
-                                />
-                            ))}
-                        </Section>
-                    )}
+                    {movieResult != null &&
+                        movieResult.results != null &&
+                        movieResult.results.length > 0 && (
+                            <Section title="Movies">
+                                {movieResult.results.map((movie) => (
+                                    <Poster
+                                        id={movie.id}
+                                        key={movie.id}
+                                        title={movie.title}
+                                        imgUrl={movie.poster_path}
+                                        rating={movie.vote_average}
+                                        year={
+                                            movie.release_date &&
+                                            movie.release_date.substring(0, 4)
+                                        }
+                                        isMovie="movie"
+                                    />
+                                ))}
+                            </Section>
+                        )}
 
                     {tvResult && tvResult.length > 0 && (
                         <Section title="TV Shows">

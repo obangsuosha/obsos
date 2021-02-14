@@ -14,7 +14,6 @@ const Container = styled.div`
 
 const Content = styled.div`
     display: flex;
-
     width: 100%;
     position: relative;
 `;

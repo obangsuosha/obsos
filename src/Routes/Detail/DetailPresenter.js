@@ -242,7 +242,7 @@ const DetailPresenter = ({ result, error, credits, similar, loading }) =>
                                         : null)
                                 }
                                 max={10}
-                                precision={0.5}
+                                precision={0.1}
                                 readOnly
                                 size="small"
                             />

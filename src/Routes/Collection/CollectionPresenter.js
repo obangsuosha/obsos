@@ -255,7 +255,7 @@ const CollectionPresenter = ({ result, error, loading }) =>
                                                                   content.vote_average
                                                               }
                                                               max={10}
-                                                              precision={0.5}
+                                                              precision={0.1}
                                                               readOnly
                                                               size="small"
                                                           />
@@ -323,7 +323,7 @@ const CollectionPresenter = ({ result, error, loading }) =>
                                                               content.vote_average
                                                           }
                                                           max={10}
-                                                          precision={0.5}
+                                                          precision={0.1}
                                                           readOnly
                                                           size="small"
                                                       />

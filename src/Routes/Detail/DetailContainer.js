@@ -82,6 +82,7 @@ export default (props) => {
     };
 
     useEffect(() => {
+        setLoading(true);
         viewDetail();
     }, [id]);
 

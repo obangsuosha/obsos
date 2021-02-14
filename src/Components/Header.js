@@ -8,9 +8,8 @@ const Header = styled.header`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 50px;
-    display: flex;
     align-items: center;
     padding: 0px 10px;
     background-color: rgba(20, 20, 20, 0.5);
@@ -18,14 +17,15 @@ const Header = styled.header`
     box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.8);
 `;
 const List = styled.ul`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 `;
 
 const Item = styled.li`
     &:not(:last-child) {
         margin-right: 10px;
     }
-    width: 50px;
+
     height: 50px;
     text-align: center;
     border-bottom: 3px solid
@@ -35,6 +35,7 @@ const Item = styled.li`
 
 const SLink = styled(Link)`
     height: 50px;
+    font-size: 22px;
     display: flex;
     align-items: center;
     justify-content: center;

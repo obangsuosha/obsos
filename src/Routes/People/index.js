@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { peopleApi } from '../../api';
 import { useInfiniteScroll } from '../../Hooks/useInfiniteScroll';
-
 import uniqBy from 'lodash.uniqby';
 import styled from 'styled-components';
 import Section from '../../Components/Section';
