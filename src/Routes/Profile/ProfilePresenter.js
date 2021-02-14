@@ -82,7 +82,7 @@ const Credits = styled.div`
     grid-auto-columns: 8%; // play with this to change height of the children, 50% will fill half
     // grid-template-columns: unset; // do not set template columns and rows
     // grid-template-rows: unset;
-    overflow-x: scroll;
+    overflow-x: auto;
 `;
 
 const CreditCover = styled.div`

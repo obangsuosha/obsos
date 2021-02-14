@@ -7,6 +7,7 @@ import Section from '../../Components/Section';
 import Message from '../../Components/Message';
 import Poster from '../../Components/Poster';
 import { Helmet } from 'react-helmet';
+import uniqBy from 'lodash.uniqby';
 
 const Container = styled.div`
     psdding: 0px 20px;
@@ -47,24 +48,54 @@ export default () => {
     };
     const searchByTerm = async () => {
         setLoading(true);
+        let movieResult = [];
+        let tvResult = [];
+        let peopleResult = [];
         try {
-            const {
-                data: { results: movieResult },
-            } = await movieApi.search(searchTerm);
-            const {
-                data: { results: tvResult },
-            } = await tvApi.search(searchTerm);
-            const {
-                data: { results: peopleResult },
-            } = await peopleApi.search(searchTerm);
+            const { data: Movie } = await movieApi.search(searchTerm, 1);
+            console.log(Movie.total_pages);
+            movieResult = Movie.results;
+            if (Movie.total_pages > 1) {
+                for (let i = 2; i < Movie.total_pages; i++) {
+                    const {
+                        data: { results: moreMovie },
+                    } = await movieApi.search(searchTerm, i);
+                    movieResult = [...movieResult, ...moreMovie];
+                }
+            }
+
+            const { data: TV } = await tvApi.search(searchTerm, 1);
+            console.log(TV.total_pages);
+            tvResult = TV.results;
+            if (TV.total_pages > 1) {
+                for (let i = 2; i < TV.total_pages; i++) {
+                    const {
+                        data: { results: moreShow },
+                    } = await tvApi.search(searchTerm, i);
+                    tvResult = [...tvResult, ...moreShow];
+                }
+            }
+
+            const { data: People } = await peopleApi.search(searchTerm, 1);
+            console.log(People.total_pages);
+            peopleResult = People.results;
+            if (People.total_pages > 1) {
+                for (let i = 2; i < People.total_pages; i++) {
+                    const {
+                        data: { results: morePeople },
+                    } = await peopleApi.search(searchTerm, i);
+                    peopleResult = [...peopleResult, ...morePeople];
+                }
+            }
+
             const {
                 data: { results: collectionResult },
             } = await collectionApi.search(searchTerm);
 
-            setMovieResult(movieResult);
-            setTvResult(tvResult);
-            setPeopleResult(peopleResult);
-            setCollectionResult(collectionResult);
+            setMovieResult(uniqBy(movieResult), 'id');
+            setTvResult(uniqBy(tvResult), 'id');
+            setPeopleResult(uniqBy(peopleResult), 'id');
+            setCollectionResult(uniqBy(collectionResult), 'id');
         } catch {
             setError("can't find result");
         } finally {

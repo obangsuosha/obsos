@@ -1,35 +1,33 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { movieApi, tvApi } from '../../api';
 import DetailPresenter from './DetailPresenter';
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        const {
-            location: { pathname },
-        } = props;
-        this.state = {
-            result: null,
-            error: null,
-            loading: true,
-            isMovie: pathname.includes('/movie'),
-        };
-    }
-    async componentDidMount() {
-        const {
-            match: {
-                params: { id },
-            },
-            history: { push },
-        } = this.props;
+export default (props) => {
+    console.log('PROPS!!!');
+    console.log(props);
+    const {
+        location: { pathname },
+    } = props;
+    const {
+        match: {
+            params: { id },
+        },
+        history: { push },
+    } = props;
 
+    const [result, setResult] = useState(null);
+    const [credits, setCredits] = useState(null);
+    const [similar, setSimilar] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [isMovie, setIsMovie] = useState(pathname.includes('/movie'));
+
+    const viewDetail = async () => {
         const parsedId = parseInt(id);
         if (isNaN(parsedId)) {
             return push('/');
         }
-
-        const { isMovie } = this.state;
 
         let result = null;
         let credits = null;
@@ -74,23 +72,26 @@ export default class extends React.Component {
                 similar = simlarRequest;
             }
         } catch {
-            this.setState({ error: "Can't find anything." });
+            setError("Can't find anything.");
         } finally {
-            this.setState({ loading: false, result, credits, similar });
+            setResult(result);
+            setCredits(credits);
+            setSimilar(similar);
+            setLoading(false);
         }
-    }
+    };
 
-    render() {
-        const { result, error, loading, credits, similar } = this.state;
-        console.log(this.state);
-        return (
-            <DetailPresenter
-                result={result}
-                error={error}
-                loading={loading}
-                credits={credits}
-                similar={similar}
-            />
-        );
-    }
-}
+    useEffect(() => {
+        viewDetail();
+    }, [id]);
+
+    return (
+        <DetailPresenter
+            result={result}
+            error={error}
+            loading={loading}
+            credits={credits}
+            similar={similar}
+        />
+    );
+};

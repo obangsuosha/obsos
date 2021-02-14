@@ -24,6 +24,24 @@ const TVPresenter = ({ topRated, airingToday, popular, error, loading }) =>
                 <title>TV | OBSOS</title>
             </Helmet>
 
+            {popular && popular.length > 0 && (
+                <Section title="Popluar">
+                    {popular.map((show) => (
+                        <Poster
+                            id={show.id}
+                            key={show.id}
+                            title={show.name}
+                            imgUrl={show.poster_path}
+                            rating={show.vote_average}
+                            year={
+                                show.first_air_date &&
+                                show.first_air_date.substring(0, 4)
+                            }
+                            isMovie="show"
+                        />
+                    ))}
+                </Section>
+            )}
             {airingToday && airingToday.length > 0 && (
                 <Section title="Today">
                     {airingToday.map((show) => (
@@ -45,24 +63,6 @@ const TVPresenter = ({ topRated, airingToday, popular, error, loading }) =>
             {topRated && topRated.length > 0 && (
                 <Section title="Top Rated">
                     {topRated.map((show) => (
-                        <Poster
-                            id={show.id}
-                            key={show.id}
-                            title={show.name}
-                            imgUrl={show.poster_path}
-                            rating={show.vote_average}
-                            year={
-                                show.first_air_date &&
-                                show.first_air_date.substring(0, 4)
-                            }
-                            isMovie="show"
-                        />
-                    ))}
-                </Section>
-            )}
-            {popular && popular.length > 0 && (
-                <Section title="Popluar">
-                    {popular.map((show) => (
                         <Poster
                             id={show.id}
                             key={show.id}
