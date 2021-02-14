@@ -17,7 +17,7 @@ const TrendingContainer = styled.div`
     display: grid;
     align-items: center;
     grid-auto-flow: column;
-    grid-auto-columns: 10%; // play with this to change height of the children, 50% will fill half
+    grid-auto-columns: 8%; // play with this to change height of the children, 50% will fill half
     // grid-template-columns: unset; // do not set template columns and rows
     // grid-template-rows: unset;
     overflow: scroll;

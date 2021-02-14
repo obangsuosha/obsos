@@ -19,7 +19,7 @@ export default class extends React.Component {
     async componentDidMount() {
         const {
             match: {
-                params: { id, number },
+                params: { id },
             },
             history: { push },
         } = this.props;

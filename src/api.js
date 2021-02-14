@@ -53,7 +53,7 @@ export const movieApi = {
 };
 
 export const peopleApi = {
-    popular: () => api.get('person/popular'),
+    popular: (id) => api.get(`person/popular?page=${id}`),
     peopleDetail: (id) =>
         api.get(`person/${id}`, {
             params: {

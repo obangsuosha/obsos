@@ -9,7 +9,6 @@ export default class extends React.Component {
         tvResult: null,
         peopleResult: null,
         collectionResult: null,
-        companyResult: null,
         searchTerm: '',
         error: null,
         loading: false,
