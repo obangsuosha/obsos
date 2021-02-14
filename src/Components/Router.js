@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Route,
     Redirect,
     Switch,
