@@ -1,36 +1,32 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from 'react';
+import React, { useState } from 'react';
 import { collectionApi, movieApi, peopleApi, tvApi } from '../../api';
 import SearchPresenter from './SearchPresenter';
 
-export default class extends React.Component {
-    state = {
-        movieResult: null,
-        tvResult: null,
-        peopleResult: null,
-        collectionResult: null,
-        searchTerm: '',
-        error: null,
-        loading: false,
-    };
-
-    handleSubmit = (event) => {
+export default () => {
+    const [movieResult, setMovieResult] = useState([]);
+    const [tvResult, setTvResult] = useState([]);
+    const [peopleResult, setPeopleResult] = useState([]);
+    const [collectionResult, setCollectionResult] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const { searchTerm } = this.state;
+
         if (searchTerm !== ' ') {
-            this.searchByTerm();
+            searchByTerm();
         }
     };
-    updateTerm = (event) => {
+    const updateTerm = (event) => {
         const {
             target: { value },
         } = event;
         console.log(value);
-        this.setState({ searchTerm: value });
+        setSearchTerm(value);
     };
-    searchByTerm = async () => {
-        const { searchTerm } = this.state;
-        this.setState({ loading: true });
+    const searchByTerm = async () => {
+        setLoading(true);
         try {
             const {
                 data: { results: movieResult },
@@ -45,46 +41,28 @@ export default class extends React.Component {
                 data: { results: collectionResult },
             } = await collectionApi.search(searchTerm);
 
-            this.setState({
-                movieResult,
-                tvResult,
-                peopleResult,
-                collectionResult,
-            });
+            setMovieResult(movieResult);
+            setTvResult(tvResult);
+            setPeopleResult(peopleResult);
+            setCollectionResult(collectionResult);
         } catch {
-            this.setState({ error: "can't find result" });
+            setError("can't find result");
         } finally {
-            this.setState({ loading: false });
+            setLoading(false);
         }
     };
 
-    // componentDidMount() {
-    //     this.handleSubmit();
-    // }
-    render() {
-        const {
-            movieResult,
-            tvResult,
-            searchTerm,
-            peopleResult,
-            collectionResult,
-
-            error,
-            loading,
-        } = this.state;
-        console.log(this.state);
-        return (
-            <SearchPresenter
-                movieResult={movieResult}
-                tvResult={tvResult}
-                peopleResult={peopleResult}
-                collectionResult={collectionResult}
-                searchTerm={searchTerm}
-                error={error}
-                loading={loading}
-                handleSubmit={this.handleSubmit}
-                updateTerm={this.updateTerm}
-            />
-        );
-    }
-}
+    return (
+        <SearchPresenter
+            movieResult={movieResult}
+            tvResult={tvResult}
+            peopleResult={peopleResult}
+            collectionResult={collectionResult}
+            searchTerm={searchTerm}
+            error={error}
+            loading={loading}
+            handleSubmit={handleSubmit}
+            updateTerm={updateTerm}
+        />
+    );
+};
