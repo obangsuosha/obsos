@@ -17,11 +17,10 @@ const Container = styled.div`
 const TrendingContainer = styled.div`
     width: 100vw;
     display: grid;
+    gap :10px;
     align-items: center;
     grid-auto-flow: column;
-    grid-auto-columns: 8%; // play with this to change height of the children, 50% will fill half
-    // grid-template-columns: unset; // do not set template columns and rows
-    // grid-template-rows: unset;
+    grid-auto-columns: 10%; 
     overflow: auto;
 `;
 

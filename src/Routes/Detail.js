@@ -83,6 +83,7 @@ const Videos = styled.div`
     height: 300px;
     display: grid;
     align-items: center;
+    gap:10px;
     grid-auto-flow: column;
     grid-auto-columns: 20%; // play with this to change height of the children, 50% will fill half
     // grid-template-columns: unset; // do not set template columns and rows
@@ -102,9 +103,10 @@ const HR = styled.hr`
 const Peoples = styled.div`
     height: 270px;
     display: grid;
+    gap: 10px;
     align-items: center;
     grid-auto-flow: column;
-    grid-auto-columns: 8%;
+    grid-auto-columns: 10%;
     overflow-x: auto;
 `;
 
@@ -140,13 +142,7 @@ const PeopleContainer = styled.div`
     &:hover {
         ${PeopleCover} {
             opacity: 0.5;
-        }
-        ${PeopleName} {
-            font-weight: 600;
-        }
-        ${CharacterName} {
-            font-weight: 600;
-        }
+        }        
     }
 `;
 const LogoContainer = styled.div`

@@ -78,9 +78,10 @@ const HR = styled.hr`
 const Credits = styled.div`
     height: 270px;
     display: grid;
+    gap: 10px;
     align-items: center;
     grid-auto-flow: column;
-    grid-auto-columns: 8%; // play with this to change height of the children, 50% will fill half
+    grid-auto-columns: 10%; // play with this to change height of the children, 50% will fill half
     // grid-template-columns: unset; // do not set template columns and rows
     // grid-template-rows: unset;
     overflow-x: auto;
@@ -119,15 +120,7 @@ const CreditContainer = styled.div`
     &:hover {
         ${CreditCover} {
             opacity: 0.5;
-        }
-        ${CreditTitle} {
-            font-size: 14px;
-            font-weight: 600;
-        }
-        ${CharacterName} {
-            font-size: 14px;
-            font-weight: 600;
-        }
+        }       
     }
 `;
 
