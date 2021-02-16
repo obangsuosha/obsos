@@ -85,7 +85,7 @@ const Videos = styled.div`
     align-items: center;
     gap:10px;
     grid-auto-flow: column;
-    grid-auto-columns: 20%; // play with this to change height of the children, 50% will fill half
+    grid-auto-columns: 30%; // play with this to change height of the children, 50% will fill half
     // grid-template-columns: unset; // do not set template columns and rows
     // grid-template-rows: unset;
     overflow-x: auto;
