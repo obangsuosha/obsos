@@ -24,6 +24,7 @@ const Rate = styled.span`
     font-weight: 700;
     transition: opacity 0.2s linear;
 `;
+
 const Title = styled.span`
     display: block;
     font-size: 12px;
@@ -44,9 +45,9 @@ const Year = styled.span`
 
 const ImageContainer = styled.div`
     margin-bottom: 5px;
-
     position: relative;
 `;
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -56,7 +57,7 @@ const Container = styled.div`
     padding: 0px 10px;
     &:hover {
         ${Image} {
-            opacity: 0.7;
+            opacity: 0.5;
         }
         ${Rate} {
             opacity: 1;
