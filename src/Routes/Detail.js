@@ -297,9 +297,9 @@ export default (props) => {
                         <Item>
                             {result != null &&
                                 (result.release_date != null
-                                    ? result.release_date.substring(0, 4)
-                                    : result.release_date != null
-                                    ? result.first_air_date.substring(0, 4)
+                                    ? result.release_date
+                                    : result.first_air_date != null
+                                    ? result.first_air_date
                                     : null)}
                         </Item>
                         <Divider>|</Divider>
